@@ -11,7 +11,7 @@ def resource_path(relative_path):
     base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
     return os.path.join(base_path, relative_path)
 
-__version__ = '1.0.2-beta'
+__version__ = '1.0.3'
 
 parser = argparse.ArgumentParser(description="Filtering and handling media files in specific foler")
 
@@ -39,57 +39,6 @@ if args.before:
 
 if args.after:
     adate = datetime.strptime(args.after, "%Y-%m-%d")
-
-
-
-def is_image(filepath, showerr=True):
-    """
-    Check if the given file is an image.
-
-    :param filepath: The path to the file to be checked.
-    :param showerr: Whether to show error messages (default True).
-    :return: True if the file is an image, False otherwise.
-    """
-    with warnings.catch_warnings(record=True) as w:
-        try:
-            with Image.open(filepath):
-                return True
-        except Exception as img_open_error:
-            # if args.rmcorrupt and (isinstance(img_open_error, UnidentifiedImageError) or (isinstance(img_open_error, OSError) and img_open_error.args[0] == "Truncated File Read")):
-            #     if args.dryrun:
-            #         print(f"[Dry run]Would delete: {filepath}")
-            #     else:
-            #         os.remove(filepath)
-            #         print(f"Deleted [{filepath}]: {img_open_error}")
-            # else:
-            #     print(f"Error [{filepath}]: {img_open_error}")
-            if showerr:
-                print(f"Error [{filepath}]: {img_open_error}")
-                if w:
-                    print(f"Warnings [{filepath}]: {w[0].message}")
-            return False
-        
-def is_video(filepath, showerr=True):
-    """
-    Check if the given file is a video file.
-
-    Args:
-        filepath (str): The path of the file to be checked.
-        showerr (bool, optional): Whether to show error message. Defaults to True.
-
-    Returns:
-        bool: True if the file is a video, False otherwise.
-    """
-    if is_image(filepath, False):
-        return False
-    else:
-        try:
-            ffmpeg.probe(filepath)
-            return True
-        except Exception as video_probe_err:
-            if showerr:
-                print(f"Error [{filepath}]: {video_probe_err}")
-            return False
 
 def check_type(filepath):
     """

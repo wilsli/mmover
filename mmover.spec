@@ -4,7 +4,7 @@
 a = Analysis(
     ['mmover.py'],
     pathex=[],
-    binaries=[('/Users/wilson/TrenzCloud/Xchange/mmover/ffmpeg/ffprobe', './ffmpeg')],
+    binaries=[('./ffmpeg/ffprobe', './ffmpeg')],
     datas=[],
     hiddenimports=[],
     hookspath=[],
