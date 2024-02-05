@@ -4,7 +4,7 @@ from datetime import datetime
 from shutil import copyfile, move
 import time
 
-__version__ = '1.1.1-exiftool-beta'
+__version__ = '0.9.e-beta'
 
 parser = argparse.ArgumentParser(description="Filtering and handling media files in specific foler")
 
